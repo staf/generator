@@ -1,5 +1,10 @@
 {
-    "require": {
-        "illuminate/view": "^5.4"
+  "autoload": {
+    "psr-4": {
+      "Staf\\": "src/"
     }
+  },
+  "require": {
+    "illuminate/view": "^5.4"
+  }
 }

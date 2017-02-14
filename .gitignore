@@ -1,6 +1,8 @@
-vendor/
 .idea/
-composer.lock
 *.sublime-project
 *.sublime-workspace
 *.project
+composer.lock
+demo/build/*
+demo/cache/*
+vendor/
