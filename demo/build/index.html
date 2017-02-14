@@ -1,13 +1,39 @@
 <html>
 <head>
     <title>app</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<nav>
-    <a href="/" class="link">Home</a>
-    <a href="/contact" class="link">Contact</a>
-    <a href="/info" class="link">About</a>
-</nav>    <h1>Hello!</h1>
-    <p>This is built static</p>
+<nav class="nav">
+    <div class="container">
+        <div class="menu">
+            <a href="/" class="link">Home</a>
+            <a href="/info" class="link">Info</a>
+            <a href="/contact" class="link">Contact</a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="content">
+            <h1 class="title">Hello!</h1>
+    <p>This is a static site with a bird!</p>
+    <img src="/img/bird.jpg" alt="Bird">
+    <hr>
+    <p>Here are some random posts.</p>
+            <article class="post">
+            <h3 class="post-title">Post 1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At earum, est explicabo fugit harum id inventore laborum molestiae odit officia porro possimus praesentium quis ratione reiciendis repellendus repudiandae totam voluptates!</p>
+        </article>
+            <article class="post">
+            <h3 class="post-title">Post 2</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid asperiores deserunt doloremque ea ipsa minus mollitia natus nemo nesciunt, nihil, quis unde veritatis. Nesciunt provident qui totam voluptate! Nihil.</p>
+        </article>
+            <article class="post">
+            <h3 class="post-title">Post 3</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A culpa doloribus dolorum explicabo laborum, laudantium numquam obcaecati odio pariatur placeat possimus quas quidem vel voluptates, voluptatibus! Aut doloribus harum porro.</p>
+        </article>
+        </div>
+</div>
 </body>
 </html>

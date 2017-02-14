@@ -16,16 +16,38 @@ $builder = new \Staf\Builder([
 ]);
 
 /**
+ * Some data that we will be passing to the info pages.
+ */
+$infoPages = [
+    ['url' => '/info', 'name' => 'Information'],
+    ['url' => '/info/history', 'name' => 'History'],
+];
+
+$posts = require __DIR__ . '/posts.php';
+
+/**
  * Build the static site based on a definition object.
  * Documentation on how this works is coming soon.
  */
 $builder->build([
-    '/'       => 'index',
+    '/'       => [
+        'entry' => 'index',
+        'files' => ['favicon.ico'],
+        'data' => ['posts' => $posts]
+    ],
     'contact' => 'contact',
     'info'    => [
         'entry'    => 'info.index',
+        'data' => [
+            'infoPages' => $infoPages
+        ],
         'children' => [
-            'history' => 'info.history',
+            'history' => [
+                'entry' => 'info.history',
+                'data' => [
+                    'infoPages' => $infoPages
+                ],
+            ],
         ],
     ],
     'img'     => [
