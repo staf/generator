@@ -9,10 +9,18 @@ $builder = new \Staf\Builder([
 ]);
 
 $builder->build([
-    '/'       => [
-        'entry' => 'index',
+    '/'       => 'index',
+    'contact' => 'contact',
+    'info' => [
+        'entry' => 'info.index',
+        'children' => [
+            'history' => 'info.history'
+        ]
     ],
-    'contact' => [
-        'entry' => 'contact',
-    ],
+    'img' => [
+        'entry' => false,
+        'files' => [
+            'bird.jpg'
+        ]
+    ]
 ]);

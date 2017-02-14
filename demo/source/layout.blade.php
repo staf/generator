@@ -3,6 +3,7 @@
     <title>app</title>
 </head>
 <body>
+@include('partials.nav')
 @yield('content')
 </body>
 </html>
