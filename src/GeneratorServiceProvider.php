@@ -14,6 +14,11 @@ class GeneratorServiceProvider extends ServiceProvider
     {
         // Setup the config file for publishing.
         $this->publishes([__DIR__ . '/config.php' => config_path('generator.php')], 'config');
+
+        // Add the default console command
+        if ($this->app->runningInConsole()) {
+            $this->commands([PublishCommand::class]);
+        }
     }
 
     /**
