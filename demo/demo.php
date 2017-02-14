@@ -2,12 +2,23 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+/**
+ * Setup the builder class, providing the absolute paths to the three working directories.
+ *
+ * source_path is where the source files are located.
+ * target_path is where the static site should be placed.
+ * cache_path is the working directory used by the Blade compiler.
+ */
 $builder = new \Staf\Builder([
-    'cache_path'  => realpath(__DIR__ . '/cache'),
     'source_path' => realpath(__DIR__ . '/source'),
     'target_path' => realpath(__DIR__ . '/build'),
+    'cache_path'  => realpath(__DIR__ . '/cache'),
 ]);
 
+/**
+ * Build the static site based on a definition object.
+ * Documentation on how this works is coming soon.
+ */
 $builder->build([
     '/'       => 'index',
     'contact' => 'contact',
