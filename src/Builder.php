@@ -17,32 +17,43 @@ use Illuminate\View\FileViewFinder;
 class Builder
 {
     /**
+     * The absolute path of the directory containing the source files.
+     *
      * @var string
      */
     protected $sourceDir;
 
     /**
+     * The absolute path of the target directory to put the compiled files in.
+     *
      * @var string
      */
     protected $targetDir;
 
     /**
+     * The absolute path to the cache directory used by the Blade compiler.
+     *
      * @var string
      */
     protected $cacheDir;
 
     /**
+     * The filesystem helper
+     *
      * @var Filesystem
      */
     protected $filesystem;
 
     /**
+     * The view factory used to render the blade templates.
+     *
      * @var Factory
      */
     protected $factory;
 
     /**
-     * Builder constructor.
+     * Create the filesystem instance, verify the various directory paths and setup the view factory.
+     * TODO: This should probably change somewhat to be able to set these by using the Laravel service container.
      *
      * @param array $config
      */
@@ -56,6 +67,8 @@ class Builder
     }
 
     /**
+     * Instantiate the view factory.
+     *
      * @return Factory
      */
     protected function getFactory()
@@ -71,10 +84,13 @@ class Builder
     }
 
     /**
-     * @param array $views
+     * Build the static site based on a definition array.
+     * TODO: Is it worth trying to make some definition class to build this array?
+     *
+     * @param array $site
      * @param bool  $clean
      */
-    public function build(array $views, $clean = false)
+    public function build($site, $clean = false)
     {
         $this->filesystem->cleanDirectory($this->targetDir);
 
@@ -82,14 +98,16 @@ class Builder
             $this->filesystem->cleanDirectory($this->cacheDir);
         }
 
-        foreach ($views as $path => $item) {
+        foreach ($site as $path => $item) {
             $this->processItem($path, $item);
         }
     }
 
     /**
-     * @param $path
-     * @param $item
+     * Handle an item in the definition array.
+     *
+     * @param string       $path
+     * @param array|string $item
      */
     protected function processItem($path, $item)
     {
@@ -129,7 +147,9 @@ class Builder
     }
 
     /**
-     * @param $path
+     * Make sure a path exists and try to create it if it doesn't
+     *
+     * @param  string $path
      * @return string
      * @throws \Exception
      */
@@ -145,8 +165,10 @@ class Builder
     }
 
     /**
-     * @param $path
-     * @param $file
+     * Build a path to a file in the source directory
+     *
+     * @param  string $path
+     * @param  string $file
      * @return string
      */
     protected function sourceFile($path, $file)
@@ -155,8 +177,10 @@ class Builder
     }
 
     /**
-     * @param $path
-     * @param $fileName
+     * Build the path for a file to put in the build/destination directory.
+     *
+     * @param  string $path
+     * @param  string $fileName
      * @return string
      */
     protected function destination($path, $fileName)
