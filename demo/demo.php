@@ -22,16 +22,25 @@ $builder = new \Staf\Builder([
 $builder->build([
     '/'       => 'index',
     'contact' => 'contact',
-    'info' => [
-        'entry' => 'info.index',
+    'info'    => [
+        'entry'    => 'info.index',
         'children' => [
-            'history' => 'info.history'
-        ]
+            'history' => 'info.history',
+        ],
     ],
-    'img' => [
+    'img'     => [
         'entry' => false,
         'files' => [
-            'bird.jpg'
-        ]
-    ]
+            'bird.jpg',
+        ],
+    ],
+    'css'     => [
+        'entry' => false,
+        'files' => [
+            [
+                'source' => realpath(__DIR__ . '/../assets/style.css'),
+                'name'   => 'style.css',
+            ],
+        ],
+    ],
 ]);

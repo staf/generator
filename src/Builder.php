@@ -138,10 +138,21 @@ class Builder
 
         // Copy files
         foreach (array_get($item, 'files', []) as $file) {
-            $this->filesystem->copy(
-                $this->sourceFile($path, $file),
-                $this->destination($path, $file)
-            );
+
+            if (is_array($file)) {
+                // If there is a specific source path defined for the file we use that
+                $this->filesystem->copy(
+                    $file['source'],
+                    $this->destination($path, $file['name'])
+                );
+
+            } else {
+                // Else we assume the file is located in the current path
+                $this->filesystem->copy(
+                    $this->sourceFile($path, $file),
+                    $this->destination($path, $file)
+                );
+            }
         }
 
     }
