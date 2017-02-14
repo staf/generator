@@ -21,21 +21,21 @@ class Builder
      *
      * @var string
      */
-    protected $sourceDir;
+    protected $sourcePath;
 
     /**
      * The absolute path of the target directory to put the compiled files in.
      *
      * @var string
      */
-    protected $targetDir;
+    protected $targetPath;
 
     /**
      * The absolute path to the cache directory used by the Blade compiler.
      *
      * @var string
      */
-    protected $cacheDir;
+    protected $cachePath;
 
     /**
      * The filesystem helper
@@ -53,17 +53,17 @@ class Builder
 
     /**
      * Create the filesystem instance, verify the various directory paths and setup the view factory.
-     * TODO: This should probably change somewhat to be able to set these by using the Laravel service container.
+     * TODO: This should probably change somewhat to be able to set these by using the Laravel service container, while still allowing us to use it outside of laravel.
      *
      * @param array $config
      */
     public function __construct(array $config)
     {
         $this->filesystem = new Filesystem();
-        $this->sourceDir  = $this->verifyPath(array_get($config, 'source_path'));
-        $this->targetDir  = $this->verifyPath(array_get($config, 'target_path'));
-        $this->cacheDir   = $this->verifyPath(array_get($config, 'cache_path'));
-        $this->factory    = $this->getFactory();
+        $this->setSourcePath(array_get($config, 'source_path'));
+        $this->setTargetPath(array_get($config, 'target_path'));
+        $this->setCachePath(array_get($config, 'cache_path'));
+        $this->factory = $this->getFactory();
     }
 
     /**
@@ -73,14 +73,44 @@ class Builder
      */
     protected function getFactory()
     {
-        $finder   = new FileViewFinder($this->filesystem, [$this->sourceDir]);
+        $finder   = new FileViewFinder($this->filesystem, [$this->sourcePath]);
         $resolver = new EngineResolver();
 
         $resolver->register('blade', function () {
-            return new CompilerEngine(new BladeCompiler($this->filesystem, $this->cacheDir));
+            return new CompilerEngine(new BladeCompiler($this->filesystem, $this->cachePath));
         });
 
         return new Factory($resolver, $finder, new Dispatcher());
+    }
+
+    /**
+     * Set the source path
+     *
+     * @param string $path
+     */
+    public function setSourcePath($path)
+    {
+        $this->sourcePath = $this->verifyPath($path);
+    }
+
+    /**
+     * Set the cache path
+     *
+     * @param string $path
+     */
+    public function setCachePath($path)
+    {
+        $this->cachePath = $this->verifyPath($path);
+    }
+
+    /**
+     * Set the target path
+     *
+     * @param string $path
+     */
+    public function setTargetPath($path)
+    {
+        $this->targetPath = $this->verifyPath($path);
     }
 
     /**
@@ -92,10 +122,10 @@ class Builder
      */
     public function build($site, $clean = false)
     {
-        $this->filesystem->cleanDirectory($this->targetDir);
+        $this->filesystem->cleanDirectory($this->targetPath);
 
         if ($clean) {
-            $this->filesystem->cleanDirectory($this->cacheDir);
+            $this->filesystem->cleanDirectory($this->cachePath);
         }
 
         foreach ($site as $path => $item) {
@@ -184,7 +214,7 @@ class Builder
      */
     protected function sourceFile($path, $file)
     {
-        return $this->sourceDir . '/' . $path . '/' . $file;
+        return $this->sourcePath . '/' . $path . '/' . $file;
     }
 
     /**
@@ -196,6 +226,6 @@ class Builder
      */
     protected function destination($path, $fileName)
     {
-        return $this->verifyPath($this->targetDir . '/' . trim($path, '/')) . '/' . $fileName;
+        return $this->verifyPath($this->targetPath . '/' . trim($path, '/')) . '/' . $fileName;
     }
 }
