@@ -31,8 +31,8 @@ class GeneratorServiceProvider extends ServiceProvider
         $this->app->bind(Builder::class, function ($app) {
             return new Builder([
                 'source_path' => $app['config']['generator']['source_path'],
-                'target_path' => $app['config']['generator']['source_path'],
-                'cache_path'  => $app['config']['generator']['source_path'],
+                'target_path' => $app['config']['generator']['target_path'],
+                'cache_path'  => $app['config']['generator']['cache_path'],
             ]);
         });
     }
