@@ -8,7 +8,6 @@ I created this partly because I needed to get some static files generated for on
 
 ## TODO
 
-- Figure out what package name to use
 - Documentation
 - Laravel integration
 - Proper demo site in project and live.

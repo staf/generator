@@ -1,5 +1,7 @@
 <?php
 
+use Staf\Generator\Builder;
+
 require __DIR__ . '/../vendor/autoload.php';
 
 /**
@@ -9,7 +11,7 @@ require __DIR__ . '/../vendor/autoload.php';
  * target_path is where the static site should be placed.
  * cache_path is the working directory used by the Blade compiler.
  */
-$builder = new \Staf\Builder([
+$builder = new Builder([
     'source_path' => realpath(__DIR__ . '/source'),
     'target_path' => realpath(__DIR__ . '/build'),
     'cache_path'  => realpath(__DIR__ . '/cache'),

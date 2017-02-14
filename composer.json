@@ -1,10 +1,12 @@
 {
+  "name": "staf/generator",
+  "description": "A basic and configurable static site generator to integrate with Laravel or other projects.",
   "autoload": {
     "psr-4": {
-      "Staf\\": "src/"
+      "Staf\\Generator\\": "src/"
     }
   },
   "require": {
-    "illuminate/view": "^5.4"
+    "illuminate/view": "^5.3"
   }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Staf;
+namespace Staf\Generator;
 
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
