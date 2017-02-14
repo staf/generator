@@ -34,6 +34,8 @@ class PublishCommand extends Command
     public function __construct(Builder $builder)
     {
         $this->builder = $builder;
+
+        parent::__construct();
     }
 
     /**
