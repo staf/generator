@@ -1,6 +1,7 @@
 {
   "name": "staf/generator",
   "description": "A basic and configurable static site generator to integrate with Laravel or other projects.",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "Staf\\Generator\\": "src/"
